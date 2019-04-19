@@ -1,0 +1,50 @@
+version: '3'
+services:
+    mysql:
+        image: mysql:5.7
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: ${DOCKER_MYSQL_DATABASE}
+        ports:
+            - 3300:3306
+
+    myadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - ${DOCKER_PMA_PORT}:80
+        restart: always
+        links:
+            - mysql:db
+        depends_on:
+            - mysql
+        environment:
+            PMA_USER: root
+            PMA_PASSWORD: root
+
+    php:
+        build: ./docker/php
+        #entrypoint: sh /bin/entrypoint.sh php-fpm
+        links:
+            - mysql:mysqldb
+        restart: always
+        volumes:
+            - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+            - ./:/var/www/html
+            - ./docker/log/nginx:/var/log/nginx
+            #- ./docker/php/entrypoint.sh:/bin/entrypoint.sh
+
+    web:
+        build: ./docker/nginx
+        ports:
+            - ${DOCKER_HTTP_PORT}:80
+        restart: always
+        volumes:
+            - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./docker/nginx/app.conf:/etc/nginx/sites-available/application.conf
+            - ./docker/nginx/app.conf:/etc/nginx/sites-enabled/application
+            - ./docker/log/nginx:/var/log/nginx
+            - ./:/var/www/html
+        depends_on:
+            - php
+            - mysql
