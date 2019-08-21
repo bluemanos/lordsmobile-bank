@@ -46,15 +46,19 @@ class HomeController extends Controller
      */
     public function store(StoreResourceRequest $request)
     {
-        $user = User::firstOrCreate([
-            'nick' => $request->get('nick'),
-        ]);
+        $user = auth()->user();
+
+        if ($request->has('nick') && auth()->user()->hasAnyPermission(['all', 'accept income'])) {
+            $user = User::firstOrCreate([
+                'nick' => $request->get('nick'),
+            ]);
+        }
 
         Resource::create([
             'bank_id' => $request->get('bank'),
             'creator_id' => auth()->user()->id,
             'user_id' => $user->id,
-            'accepted' => auth()->user()->hasAnyPermission(['all', 'accept income']),
+            'accepted_by' => auth()->user()->hasAnyPermission(['all', 'accept income']) ? auth()->user() : null,
             'amount' => $request->get('amount'),
             'rss' => $request->get('rss'),
             'comment' => $request->get('comment', ''),

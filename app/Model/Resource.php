@@ -16,7 +16,7 @@ class Resource extends Model
      * @var array
      */
     protected $fillable = [
-        'bank_id', 'creator_id','user_id', 'accepted', 'amount', 'rss', 'comment',
+        'bank_id', 'creator_id', 'user_id', 'accepted_by', 'amount', 'rss', 'comment',
     ];
 
     const TYPES = ['food', 'stones', 'timber', 'ore', 'gold'];

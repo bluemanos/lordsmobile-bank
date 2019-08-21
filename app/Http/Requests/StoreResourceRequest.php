@@ -26,7 +26,6 @@ class StoreResourceRequest extends FormRequest
     public function rules()
     {
         return [
-            'nick' => ['required'],
             'bank' => ['required', 'exists:banks,id'],
             'amount' => ['required', 'integer'],
             'rss' => [Rule::in(Resource::TYPES)],

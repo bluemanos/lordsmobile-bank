@@ -197,10 +197,12 @@
             <!-- Card Body -->
             <div class="card-body">
                 {!! Form::open() !!}
+                @if (auth()->user()->hasAnyPermission(['all', 'accept income']))
                 <div class="form-group">
                     <label>Supplier nick</label>
-                    {!! Form::text('nick', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('nick', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
                 </div>
+                @endif
 
                 <div class="form-group">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -272,7 +274,7 @@
                         @foreach($resources as $resource)
                         <tr>
                             <td>
-                                <a href="{{ route('user.profile', ['user' => $resource->user]) }}">{{ $resource->user->nick }}</a>
+                                <a href="{{ route('user.profile', ['user' => $resource->user]) }}">{{ $resource->user->fullName }}</a>
                             </td>
                             <td>{{ $resource->rss }}</td>
                             <td>

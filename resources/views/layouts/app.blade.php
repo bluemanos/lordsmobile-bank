@@ -59,7 +59,9 @@
             <div id="collapseTwo" class="collapse active" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{ route('deposit.index') }}">List</a>
+                    @if (auth()->user()->hasAnyPermission(['all', 'accept income']))
                     <a class="collapse-item" href="{{ route('deposit.to-accept') }}">To accept</a>
+                    @endif
                 </div>
             </div>
         </li>

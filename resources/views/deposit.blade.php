@@ -49,7 +49,7 @@
                                     <span class="fa fa-comment" data-toggle="tooltip" data-placement="top" title="{{ $resource->comment }}"></span>
                                 @endif
 
-                                @if ($resource->accepted_by === null)
+                                @if ($resource->accepted_by === null && auth()->user()->hasAnyPermission(['all', 'accept income']))
                                 {!! Form::open(['route' => 'deposit.to-accept', 'method' => 'put']) !!}
                                 {!! Form::token() !!}
                                 <button type="submit" name="rss" value="{{ $resource->id }}" class="btn btn-sm btn-success">Accept it</button>
