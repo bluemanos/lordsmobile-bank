@@ -2,8 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreResourceRequest;
+use App\Model\Resource;
+use App\Model\User;
+use App\Repositories\BankRepository;
+use App\Repositories\ResourceRepository;
 
+/**
+ * Class HomeController
+ * @package App\Http\Controllers
+ */
 class HomeController extends Controller
 {
     /**
@@ -21,8 +29,37 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(BankRepository $banktRepository, ResourceRepository $resourceRepository)
     {
-        return view('home');
+        $bankRss = $resourceRepository->sum();
+        $yourRss = $resourceRepository->sum(auth()->user());
+
+        $resources = Resource::with(['user', 'creator'])->limit(5)->latest()->get();
+        $banks = $banktRepository->all();
+
+        return view('home', compact('bankRss', 'yourRss', 'resources', 'banks'));
+    }
+
+    /**
+     * @param StoreResourceRequest $request
+     * @return mixed
+     */
+    public function store(StoreResourceRequest $request)
+    {
+        $user = User::firstOrCreate([
+            'nick' => $request->get('nick'),
+        ]);
+
+        Resource::create([
+            'bank_id' => $request->get('bank'),
+            'creator_id' => auth()->user()->id,
+            'user_id' => $user->id,
+            'accepted' => auth()->user()->hasAnyPermission(['all', 'accept income']),
+            'amount' => $request->get('amount'),
+            'rss' => $request->get('rss'),
+            'comment' => $request->get('comment', ''),
+        ]);
+
+        return back()->withSuccess('Resource added');
     }
 }

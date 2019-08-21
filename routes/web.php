@@ -11,10 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/home');
 
-Auth::routes();
+\Route::auth();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/home', 'HomeController@store');
+
+Route::get('/deposits', 'DepositController@index')->name('deposit.index');
+Route::get('/deposits/to-accept', 'DepositController@toAccept')->name('deposit.to-accept');
+Route::put('/deposits/to-accept', 'DepositController@toAcceptProcess');
+
+Route::get('/user', 'UserController@list')->name('user.list');
+Route::get('/user/{user}', 'UserController@profile')->name('user.profile');
