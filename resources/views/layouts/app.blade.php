@@ -14,6 +14,7 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @yield('stylesheet')
 </head>
 
 <body id="page-top">
@@ -42,6 +43,7 @@
                 <span>Dashboard</span></a>
         </li>
 
+        @if (auth()->user()->hasAnyPermission(['all', 'accept income']))
         <!-- Divider -->
         <hr class="sidebar-divider">
 
@@ -59,9 +61,7 @@
             <div id="collapseTwo" class="collapse active" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{ route('deposit.index') }}">List</a>
-                    @if (auth()->user()->hasAnyPermission(['all', 'accept income']))
                     <a class="collapse-item" href="{{ route('deposit.to-accept') }}">To accept</a>
-                    @endif
                 </div>
             </div>
         </li>
@@ -78,6 +78,7 @@
                 </div>
             </div>
         </li>
+        @endif
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -222,7 +223,7 @@
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('user.account') }}">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
@@ -249,6 +250,7 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
+                @include('layouts._alerts')
                 @yield('content')
             </div>
             <!-- /.container-fluid -->

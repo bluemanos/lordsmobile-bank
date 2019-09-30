@@ -298,8 +298,9 @@
                         </tbody>
                     </table>
                 </div>
-
+                @if (auth()->user()->hasAnyPermission(['all', 'display bank']))
                 <a href="{{ route('deposit.index') }}" class="btn btn-primary"><i class="fa fa-list"></i>  Show more</a>
+                @endif
             </div>
         </div>
     </div>
@@ -308,7 +309,7 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Resources overview</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Your resources overview</h6>
             </div>
             <!-- Card Body -->
             <div class="card-body">
@@ -340,11 +341,11 @@
 
 @section('javascript')
     <script>
-        const food_amount = {{ $bankRss['food'] }};
-        const stones_amount = {{ $bankRss['stones'] }};
-        const timber_amount = {{ $bankRss['timber'] }};
-        const ore_amount = {{ $bankRss['ore'] }};
-        const gold_amount = {{ $bankRss['gold'] }};
+        const food_amount = {{ $yourRss['food'] }};
+        const stones_amount = {{ $yourRss['stones'] }};
+        const timber_amount = {{ $yourRss['timber'] }};
+        const ore_amount = {{ $yourRss['ore'] }};
+        const gold_amount = {{ $yourRss['gold'] }};
 
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()

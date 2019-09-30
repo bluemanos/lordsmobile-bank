@@ -24,5 +24,8 @@ Route::get('/deposits', 'DepositController@index')->name('deposit.index');
 Route::get('/deposits/to-accept', 'DepositController@toAccept')->name('deposit.to-accept');
 Route::put('/deposits/to-accept', 'DepositController@toAcceptProcess');
 
-Route::get('/user', 'UserController@list')->name('user.list');
+Route::get('/account', 'AccountController@account')->name('user.account');
+Route::post('/account', 'AccountController@accountSave')->name('user.account.save');
+
+Route::get('/user', 'UserController@list')->middleware('role_or_permission:all|display bank')->name('user.list');
 Route::get('/user/{user}', 'UserController@profile')->name('user.profile');

@@ -18,7 +18,7 @@ class DepositController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'role_or_permission:all|display bank']);
     }
 
     /**
@@ -33,6 +33,9 @@ class DepositController extends Controller
         return view('deposit', compact('resources'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
     public function toAccept()
     {
         if (!auth()->user()->hasAnyPermission(['all', 'accept income'])) {
@@ -44,6 +47,10 @@ class DepositController extends Controller
         return view('deposit', compact('resources'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|void
+     */
     public function toAcceptProcess(Request $request)
     {
         if (!auth()->user()->hasAnyPermission(['all', 'accept income'])) {

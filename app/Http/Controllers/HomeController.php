@@ -27,15 +27,17 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @param BankRepository $bankRepository
+     * @param ResourceRepository $resourceRepository
      * @return \Illuminate\Contracts\Support\Renderable
+     * @throws \Exception
      */
-    public function index(BankRepository $banktRepository, ResourceRepository $resourceRepository)
+    public function index(BankRepository $bankRepository, ResourceRepository $resourceRepository)
     {
         $bankRss = $resourceRepository->sum();
         $yourRss = $resourceRepository->sum(auth()->user());
-
-        $resources = Resource::with(['user', 'creator'])->limit(5)->latest()->get();
-        $banks = $banktRepository->all();
+        $resources = $resourceRepository->getWithPaginator(auth()->user());
+        $banks = $bankRepository->all();
 
         return view('home', compact('bankRss', 'yourRss', 'resources', 'banks'));
     }
@@ -50,7 +52,8 @@ class HomeController extends Controller
 
         if ($request->has('nick') && auth()->user()->hasAnyPermission(['all', 'accept income'])) {
             $user = User::firstOrCreate([
-                'nick' => $request->get('nick'),
+                'nick' => $request->get('nick'),HabPanel
+
             ]);
         }
 
@@ -58,7 +61,7 @@ class HomeController extends Controller
             'bank_id' => $request->get('bank'),
             'creator_id' => auth()->user()->id,
             'user_id' => $user->id,
-            'accepted_by' => auth()->user()->hasAnyPermission(['all', 'accept income']) ? auth()->user() : null,
+            'accepted_by' => auth()->user()->hasAnyPermission(['all', 'accept income']) ? auth()->user()->id : null,
             'amount' => $request->get('amount'),
             'rss' => $request->get('rss'),
             'comment' => $request->get('comment', ''),
