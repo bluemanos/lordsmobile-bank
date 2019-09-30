@@ -30,7 +30,7 @@
             <div class="sidebar-brand-icon">
                 <i class="fas fa-chess-rook"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">[PRL]</div>
+            <div class="sidebar-brand-text mx-3">{{ shortGuildName() }}</div>
         </a>
 
         <!-- Divider -->
