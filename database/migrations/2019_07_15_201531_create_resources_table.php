@@ -18,7 +18,7 @@ class CreateResourcesTable extends Migration
             $table->unsignedBigInteger('bank_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->bigInteger('amount');
-            $table->enum('rss', ['food', 'stones', 'timber', 'ore']);
+            $table->enum('rss', ['food', 'stones', 'timber', 'ore', 'gold']);
             $table->timestamps();
 
             $table->foreign('bank_id')->references('id')->on('banks')->onDelete('cascade');

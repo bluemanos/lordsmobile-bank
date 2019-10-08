@@ -38,10 +38,6 @@ class DepositController extends Controller
      */
     public function toAccept()
     {
-        if (!auth()->user()->hasAnyPermission(['all', 'accept income'])) {
-            return abort(401);
-        }
-
         $resources = Resource::whereNull('accepted_by')->with(['user', 'creator'])->latest()->paginate();
 
         return view('deposit', compact('resources'));
@@ -53,10 +49,6 @@ class DepositController extends Controller
      */
     public function toAcceptProcess(Request $request)
     {
-        if (!auth()->user()->hasAnyPermission(['all', 'accept income'])) {
-            return abort(401);
-        }
-
         $resource = Resource::findOrFail($request->get('rss'));
         $resource->accepted_by = auth()->user()->id;
         $resource->save();

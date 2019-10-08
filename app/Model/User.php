@@ -6,6 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * Class User
+ * @package App\Model
+ */
 class User extends Authenticatable
 {
     use HasRoles;
@@ -38,6 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @return string
+     */
     public function getFullNameAttribute()
     {
         return $this->attributes['name']. ' ('.$this->attributes['nick'].')';

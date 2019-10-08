@@ -78,19 +78,19 @@
             <div class="card-body">
                 <div class="bd-example">
                     <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width:{{ intval($userRss['food']/$userRssSum*100) }}%" aria-valuenow="{{ intval($userRss['food']/$userRssSum*100) }}" aria-valuemin="0" aria-valuemax="100">{{ rss_format($userRss['food']) }} food</div>
+                        <div class="progress-bar bg-success" role="progressbar" style="width:{{ $userRssSum === 0 ? 0 : intval($userRss['food']/$userRssSum*100) }}%" aria-valuenow="{{ $userRssSum === 0 ? 0 : (intval($userRss['food']/$userRssSum*100)) }}" aria-valuemin="0" aria-valuemax="100">{{ rss_format($userRss['food']) }} food</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar bg-secondary" role="progressbar" style="width:{{ intval($userRss['stones']/$userRssSum*100) }}%" aria-valuenow="{{ intval($userRss['stones']/$userRssSum*100) }}" aria-valuemin="0" aria-valuemax="100">{{ rss_format($userRss['stones']) }} stones</div>
+                        <div class="progress-bar bg-secondary" role="progressbar" style="width:{{ $userRssSum === 0 ? 0 : intval($userRss['stones']/$userRssSum*100) }}%" aria-valuenow="{{ $userRssSum === 0 ? 0 : (intval($userRss['stones']/$userRssSum*100)) }}" aria-valuemin="0" aria-valuemax="100">{{ rss_format($userRss['stones']) }} stones</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width:{{ intval($userRss['timber']/$userRssSum*100) }}%" aria-valuenow="{{ intval($userRss['timber']/$userRssSum*100) }}" aria-valuemin="0" aria-valuemax="100">{{ rss_format($userRss['timber']) }} timber</div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width:{{ $userRssSum === 0 ? 0 : intval($userRss['timber']/$userRssSum*100) }}%" aria-valuenow="{{ $userRssSum === 0 ? 0 : (intval($userRss['timber']/$userRssSum*100)) }}" aria-valuemin="0" aria-valuemax="100">{{ rss_format($userRss['timber']) }} timber</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar bg-info" role="progressbar" style="width:{{ intval($userRss['ore']/$userRssSum*100) }}%" aria-valuenow="{{ intval($userRss['ore']/$userRssSum*100) }}" aria-valuemin="0" aria-valuemax="100">{{ rss_format($userRss['ore']) }} ore</div>
+                        <div class="progress-bar bg-info" role="progressbar" style="width:{{ $userRssSum === 0 ? 0 : intval($userRss['ore']/$userRssSum*100) }}%" aria-valuenow="{{ $userRssSum === 0 ? 0 : (intval($userRss['ore']/$userRssSum*100)) }}" aria-valuemin="0" aria-valuemax="100">{{ rss_format($userRss['ore']) }} ore</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width:{{ intval($userRss['gold']/$userRssSum*100) }}%" aria-valuenow="{{ intval($userRss['gold']/$userRssSum*100) }}" aria-valuemin="0" aria-valuemax="100">{{ rss_format($userRss['gold']) }} gold</div>
+                        <div class="progress-bar bg-warning" role="progressbar" style="width:{{ $userRssSum === 0 ? 0 : intval($userRss['gold']/$userRssSum*100) }}%" aria-valuenow="{{ $userRssSum === 0 ? 0 : (intval($userRss['gold']/$userRssSum*100)) }}" aria-valuemin="0" aria-valuemax="100">{{ rss_format($userRss['gold']) }} gold</div>
                     </div>
                 </div>
             </div>

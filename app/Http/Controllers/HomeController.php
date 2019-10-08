@@ -52,7 +52,7 @@ class HomeController extends Controller
 
         if ($request->has('nick') && auth()->user()->hasAnyPermission(['all', 'accept income'])) {
             $user = User::firstOrCreate([
-                'nick' => $request->get('nick'),HabPanel
+                'nick' => $request->get('nick'),
 
             ]);
         }

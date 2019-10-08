@@ -1,0 +1,206 @@
+::selection {
+  background: #1cb2b0; 
+  color: #fff;
+}
+
+a {
+    color: #353535;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+a:hover, a:focus {
+    color: #0DB2B0;
+    text-decoration: none;
+}
+
+
+
+
+/* ==========================================================================
+Waypoints
+========================================================================== */
+
+.wp1, .wp2, .wp3, .wp4, .wp5, .wp6 {
+    visibility: hidden;
+}
+.bounceInLeft, .bounceInRight, .fadeInUp, .fadeInUpDelay, .fadeInDown, .fadeInUpD, .fadeInLeft, .fadeInRight {
+    visibility: visible;
+}
+
+/* ==========================================================================
+Portfolio
+========================================================================== */
+#portfolio {  
+background: #F3F5F8; 
+padding-bottom: 40px; 
+}
+
+.portfolioheader {
+background: #0DB2B0;
+padding: 20px 0;
+}
+
+.portfolioheader h1 {
+color: #fff;
+font-size: 33px;
+text-transform: uppercase;
+letter-spacing: 4px;
+font-family: "brandon-grotesque", sans-serif;
+font-weight: 500;
+}
+
+.portfolioheader p {
+color: #fff;
+font-size: 16px;
+letter-spacing: 2px;
+font-family: "adelle", sans-serif;
+font-weight: 400;
+color: #a3e0df;
+}
+
+/*---------------*/
+/***** Grid Effects *****/
+/*---------------*/
+
+.grid {
+position: relative;
+margin: 40px auto;
+max-width: 1000px;
+list-style: none;
+text-align: center;
+}
+
+/* Common style */
+.grid figure {
+position: relative;
+float: left;
+overflow: hidden;
+margin: 10px 1%;
+min-width: 320px;
+max-width: 480px;
+max-height: 360px;
+width: 48%;
+background: #fff;
+text-align: center;
+cursor: pointer;
+}
+
+.grid figure img {
+position: relative;
+display: block;
+}
+
+.grid figure figcaption {
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+}
+
+.grid figure figcaption::before,
+.grid figure figcaption::after {
+pointer-events: none;
+}
+
+.grid figure figcaption,
+.grid figure figcaption > a {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+
+.grid figure h2,
+.grid figure p
+{
+margin: 0;
+}
+
+.grid figure p {
+letter-spacing: 1px;
+font-size: 68.5%;
+}
+
+@media screen and (max-width: 50em) {
+  .grid figure {
+  display: inline-block;
+  float: none;
+  margin: 10px auto;
+  width: 85%;		
+  }
+}
+
+figure.effect-visuofolio {
+  background: #0cb3b0;
+}
+
+figure.effect-visuofolio img {
+-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+transition: opacity 0.35s, transform 0.35s;
+-webkit-transform: scale(1);
+transform: scale(1);
+max-width: 480px; 
+max-height: 320px;
+}
+
+figure.effect-visuofolio:hover img {
+opacity: 0.2;
+
+-webkit-transform: scale(1.1);
+transform: scale(1.1);
+}
+
+figure.effect-visuofolio figcaption {
+padding: 3em; 
+}
+
+figure.effect-visuofolio figcaption::before {
+position: absolute;
+top: 30px;
+right: 30px;
+bottom: 30px;
+left: 30px;
+border: 2px solid #fff;
+content: '';
+-webkit-transform: scale(1.1);
+transform: scale(1.1);
+}
+
+figure.effect-visuofolio figcaption::before,
+figure.effect-visuofolio p, 
+figure.effect-visuofolio h2 {
+opacity: 0;
+-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+transition: opacity 0.35s, transform 0.35s;
+}
+
+figure.effect-visuofolio h2 {
+padding: 20% 0 20px 0;
+-webkit-transform: scale(1.5);
+transform: scale(1.5);
+color: #fff;
+font-size: 17px;
+letter-spacing: 2px;
+font-family: "brandon-grotesque", sans-serif;
+font-weight: 500;
+}
+
+figure.effect-visuofolio p {
+margin: 0 auto;
+max-width: 200px;
+-webkit-transform: scale(1.5);
+transform: scale(1.5);
+color: #fff;
+font-size: 14px;
+font-family: "adelle", sans-serif;
+padding-bottom: 20px;
+}
+
+figure.effect-visuofolio:hover figcaption::before,
+figure.effect-visuofolio:hover p, 
+figure.effect-visuofolio:hover h2 {
+opacity: 1;
+-webkit-transform: scale(1);
+transform: scale(1);
+}
